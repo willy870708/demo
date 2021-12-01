@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Service.SimpleJdbcService;
+
 @Service
 public class SimpleJdbcServiceImpl implements SimpleJdbcService {
 
