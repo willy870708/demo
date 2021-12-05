@@ -1,0 +1,39 @@
+CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY APUSER.PG_USER AS
+
+  FUNCTION FN_GET_USER_INFO(
+    I_USER_ID VARCHAR2,
+    I_USER_NM VARCHAR2,
+    I_GENRDER VARCHAR2
+  ) RETURN SYS_REFCURSOR
+  AS
+    O_RESULT SYS_REFCURSOR;
+  BEGIN
+    OPEN O_RESULT FOR
+    SELECT
+        U.CREATR_TIME,
+        U.UPDATE_TIME,
+        U.USER_ID,
+        U.USER_NM,
+        U.GENRDER,
+        U.AGE,
+        U.MAIL
+    FROM
+        APUSER.TB_USER U
+    WHERE
+        I_USER_ID IS NULL
+        OR I_USER_ID = U.USER_ID
+        AND(
+            I_USER_NM IS NULL
+            OR I_USER_NM = U.USER_NM
+        )
+        AND(
+            I_GENRDER IS NULL
+            OR I_GENRDER = U.GENRDER
+        )
+    ;
+    
+    RETURN O_RESULT;
+
+  END FN_GET_USER_INFO;
+
+END PG_USER;
