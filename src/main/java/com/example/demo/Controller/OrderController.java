@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.SimpleJdbcService;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/order")
+public class OrderController {
 	@Autowired
 	SimpleJdbcService simpleJdbcService;
 	
 	@PostMapping("/01")
-	public List<?> qryUsers() {
+	public Map<String,?> qryOrders() {
 		MapSqlParameterSource dataSource = new MapSqlParameterSource();
 		dataSource
-			.addValue("I_USER_ID", null)		
-			.addValue("I_USER_NM", null)
-			.addValue("I_GENRDER", null);
+			.addValue("I_ORDER_ID", null)		
+			.addValue("I_HOSTER_ID", null)
+			.addValue("I_ORDER_DATE", null)
+			.addValue("I_END_DATE", null)		
+			.addValue("I_ORDER_TYPE", null)
+			.addValue("I_STORE_ID", null)
+			.addValue("I_CONTACT_METHOD", null)		
+			.addValue("I_AMOUNT_LIMIT", null)
+			.addValue("I_STATUS", null)
+			.addValue("I_PAGE_NO", 1)		
+			.addValue("I_PAGE_SIZE", 2);
 		
-		return simpleJdbcService.doCallFunction("APUSER", "PG_USER", "FN_GET_USER_INFO", dataSource);
+		return simpleJdbcService.doCallProcdeure("APUSER", "PG_ORDER", "SP_QRY_ORDERS", dataSource);
 	}
 }
