@@ -10,4 +10,5 @@ public interface SimpleJdbcService {
 	
 	Map<String, ?> doCallProcdeure(String schemaName, String catalogName, String prodceureName, MapSqlParameterSource mapSqlParameterSource);
 	
+	List<?> Convert2BeanList();
 }
